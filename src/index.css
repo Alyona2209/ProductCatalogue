@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+.catalogue {
+  border: solid #5a5d6f 2px;
+  margin: 15px auto;
+  width: 90%;
+  min-height: 70%;
+  position: relative;
+}
+.catalogue .coverLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(80, 80, 80, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.catalogue .coverLayer button {
+  margin: auto;
+  width: 7.2%;
+  max-width: 70px;
+  background-color: transparent;
+  border: none;
+}
+.catalogue .coverLayer button img {
+  max-width: 100%;
+  min-width: 30px;
+  background-color: rgba(250, 250, 250, 0.8);
+  border-radius: 10px;
+}
+.catalogue .coverLayer button:active, .catalogue .coverLayer button:focus {
+  border-color: #5a5d6f;
+}
+.catalogue .coverLayer .expProductBox {
+  width: 80%;
+  max-width: 850px;
+  height: auto;
+  max-height: 90%;
+  margin: auto;
+  background-color: white;
+}
+.catalogue .coverLayer .expProductBox h1, .catalogue .coverLayer .expProductBox p {
+  margin: 15px;
+}
+.catalogue .coverLayer .expProductBox img {
+  width: 36%;
+  max-height: 60%;
+  float: left;
+  margin: 15px;
+  margin-top: 0;
+}
+.catalogue .coverLayer .expProductBox .inStock {
+  color: #5a5d6f;
+  font-style: italic;
+}
+.catalogue .coverLayer .expProductBox .price {
+  color: #00005f;
+  font-weight: bold;
+}
+
+.productTable {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+}
+.productTable .productBox {
+  border: solid #5a5d6f 2px;
+  padding: 10px;
+  margin: 15px;
+  width: 18%;
+  min-width: 90px;
+  max-width: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.productTable .productBox .productName {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+
+.searchBar {
+  margin: 15px;
+  padding: 10px;
+  width: 18%;
+  height: 30px;
+  border: solid #444758 2px;
+  font-size: 1em;
+}
+.searchBar:active {
+  border-width: 4px;
+  border-color: #29348b;
+}
+
+html, body, #container {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Open Sans Condensed", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*# sourceMappingURL=index.css.map */

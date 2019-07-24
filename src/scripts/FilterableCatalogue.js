@@ -1,49 +1,73 @@
 import React from 'react';
 import '../styles/App.sass';
 import {SearchBar} from "./SearchBar";
-import {ProductTable} from "./ProductTable";
+import {ProductCatalogue} from "./ProductCatalogue";
+import {ExpandedProductBox} from "./ExpandedProductBox";
 
-export const PRODUCTS = [
-  {name: 'Платье Арт. 111', imageSrc: 'src/assets/images/dress1-small.jpg', price: '270 BYN', inStock: true,
-    description: 'Романтичное платье Х-силуэта из фактурной костюмной ткани длиной миди.'},
-  {name: 'Платье Арт. 112', imageSrc: '/assets/images/dress2-small.jpg', price: '298 BYN', inStock: true,
-    description: 'Романтичное платье Х-силуэта с фигурной линией низа и кулиской на талии.'},
-  {name: 'Платье Арт. 113', imageSrc: './assets/images/dress3-small.jpg', price: '91 BYN', inStock: true,
-    description: 'Блузка прямого силуэта из легкой вискозной ткани с дизайнерским принтом. '},
-  {name: 'Платье Арт. 114', imageSrc: './assets/images/dress4-small.jpg', price: '65 BYN', inStock: true,
-    description: 'Элегантная блузка из хлопковой ткани с длинными рукавами и манжетами'},
-  {name: 'Платье Арт. 115', imageSrc: './assets/images/dress5-small.jpg', price: '154 BYN', inStock: true,
-    description: 'Широкие прямые брюки с кармашками по бокам из фактурной вискозной ткани.'},
-  {name: 'Платье Арт. 116', imageSrc: './assets/images/dress6-small.jpg', price: '225 BYN', inStock: true,
-    description: 'Элегантный комбинезон с брюками 7/8 со стрелками из фактурной стрейчевой ткани.'}
-];
 
-export class FilteredCatalogue extends React.Component {
+export class FilterableCatalogue extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterText: ''
+      filterText: '',
+      openProduct: undefined
     };
-
-    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
   }
 
-  handleFilterTextChange(filterText) {
+  setOpenProduct (product) {
+      if (product) {
+          this.setState({
+              openProduct: product
+          });
+      } else {
+          this.setState({
+              openProduct: undefined
+          });
+      }
+  }
+
+  handleClick = (e) => {
+    if (e.target.closest('.productBox')) {
+      let productName = e.target.closest('.productBox').querySelector("p").innerText;
+      let product = this.props.products.find((product) => {
+         return product.name === productName;
+      });
+      this.setOpenProduct(product);
+
+    } else if (e.target.closest('button')) {
+        let button = e.target.closest('button'),
+            curIndex = this.props.products.indexOf(this.state.openProduct);
+
+        if (button.name === 'left' && curIndex !== 0) {
+            this.setOpenProduct(this.props.products[curIndex - 1]);
+        } else if (button.name === 'right' && curIndex !== this.props.products.length - 1){
+            this.setOpenProduct(this.props.products[curIndex + 1]);
+        }
+
+    } else if (e.target.closest('.coverLayer')) {
+        this.setOpenProduct();
+    }
+  };
+
+  handleFilterTextChange = (filterText) => {
     this.setState({
       filterText: filterText
     });
-  }
+  };
 
   render() {
     return (
-        <div>
+        <div className="catalogue" onClick = {this.handleClick}>
           <SearchBar
-              filterText={this.state.filterText}
-              onFilterTextChange={this.handleFilterTextChange}
+              filterText = {this.state.filterText}
+              onFilterTextChange = {this.handleFilterTextChange}
           />
-          <ProductTable
-              products={this.props.products}
-              filterText={this.state.filterText}
+          <ProductCatalogue
+              products = {this.props.products}
+              filterText = {this.state.filterText}
+          />
+          <ExpandedProductBox
+              product = {this.state.openProduct}
           />
         </div>
     );
