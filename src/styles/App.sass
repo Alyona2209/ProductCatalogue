@@ -90,6 +90,11 @@ $padding: 10px
       font-family: $font_family1
       font-weight: bold
 
+    &:focus, &:hover
+      border-width: 4px
+      padding: 8px
+      border-color: #d2d2d2
+
 
 .searchBar
   margin: 15px
@@ -99,7 +104,9 @@ $padding: 10px
   border: solid #444758 2px
   font-size: 1em
 
-  &:active
+  &:active, &:focus, &:hover
     border-width: 4px
-    border-color: #29348b
+    padding: 8px
+    border-color: #d2d2d2
+    outline: none
 

@@ -84,6 +84,11 @@
   font-family: "Roboto", sans-serif;
   font-weight: bold;
 }
+.productTable .productBox:focus, .productTable .productBox:hover {
+  border-width: 4px;
+  padding: 8px;
+  border-color: #d2d2d2;
+}
 
 .searchBar {
   margin: 15px;
@@ -93,9 +98,11 @@
   border: solid #444758 2px;
   font-size: 1em;
 }
-.searchBar:active {
+.searchBar:active, .searchBar:focus, .searchBar:hover {
   border-width: 4px;
-  border-color: #29348b;
+  padding: 8px;
+  border-color: #d2d2d2;
+  outline: none;
 }
 
 html, body, #container {
