@@ -17,27 +17,11 @@ export class ProductCatalogue extends React.Component {
                 return {openProduct: product}
             });
         } else {
-            this.setState({
+            this.setState((state) => {
                 openProduct: undefined
             });
         }
     }
-
-    handleClick = (e) => {
-        if (e.target.closest('button')) {
-            let button = e.target.closest('button'),
-                curIndex = this.props.products.indexOf(this.state.openProduct);
-
-            if (button.name === 'left' && curIndex !== 0) {
-                this.setOpenProduct(this.props.products[curIndex - 1]);
-            } else if (button.name === 'right' && curIndex !== this.props.products.length - 1){
-                this.setOpenProduct(this.props.products[curIndex + 1]);
-            }
-
-        } else if (e.target.closest('.coverLayer')) {
-            this.setOpenProduct();
-        }
-    };
 
     render() {
         const filterText = this.props.filterText,
@@ -58,11 +42,15 @@ export class ProductCatalogue extends React.Component {
         });
 
         return (
-            <div className='productTable'  onClick = {this.handleClick}>
+            <div className='productTable'>
                 {filteredProducts}
-                <ExpandedProductBox
-                    product = {this.state.openProduct}
-                />
+                {this.state.openProduct &&
+                    <ExpandedProductBox
+                        product={this.state.openProduct}
+                        filteredProducts={filteredProducts}
+                        onClick={this.setOpenProduct.bind(this)}
+                    />
+                }
             </div>
         );
     }
